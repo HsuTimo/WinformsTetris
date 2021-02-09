@@ -52,7 +52,7 @@ namespace Tetris
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPlay.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnPlay.ForeColor = System.Drawing.Color.White;
-            this.btnPlay.Location = new System.Drawing.Point(88, 313);
+            this.btnPlay.Location = new System.Drawing.Point(88, 297);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(144, 53);
             this.btnPlay.TabIndex = 13;
@@ -75,7 +75,7 @@ namespace Tetris
             "Level 7",
             "Level 8",
             "Level 9"});
-            this.menuLevel.Location = new System.Drawing.Point(88, 274);
+            this.menuLevel.Location = new System.Drawing.Point(88, 254);
             this.menuLevel.Name = "menuLevel";
             this.menuLevel.Size = new System.Drawing.Size(144, 26);
             this.menuLevel.TabIndex = 14;
@@ -90,7 +90,7 @@ namespace Tetris
             this.lstHighScores.ItemHeight = 16;
             this.lstHighScores.Location = new System.Drawing.Point(88, 116);
             this.lstHighScores.Name = "lstHighScores";
-            this.lstHighScores.Size = new System.Drawing.Size(144, 144);
+            this.lstHighScores.Size = new System.Drawing.Size(144, 112);
             this.lstHighScores.TabIndex = 15;
             this.lstHighScores.UseTabStops = false;
             // 
@@ -99,7 +99,7 @@ namespace Tetris
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(325, 381);
+            this.ClientSize = new System.Drawing.Size(325, 373);
             this.Controls.Add(this.lstHighScores);
             this.Controls.Add(this.menuLevel);
             this.Controls.Add(this.btnPlay);

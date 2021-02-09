@@ -6,7 +6,7 @@ namespace Tetris.Models
 {
     public static class FormInstances
     {
-        public static TetrisForm tetrisForm = new TetrisForm();
-        public static TetrisMenu tetrisMenu = new TetrisMenu();
+        public static TetrisForm tetrisForm = null;
+        public static TetrisMenu tetrisMenu = null;
     }
 }

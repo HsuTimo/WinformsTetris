@@ -608,12 +608,12 @@ namespace Tetris
         }
         private void BtnExitClicked(object sender, EventArgs e)
         {
-            FormInstances.tetrisMenu.Close();
-            FormInstances.tetrisForm.Close();
+            FormInstances.tetrisMenu.Show();
+            FormInstances.tetrisForm.Hide();
         }
         private void TetrisFormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            FormInstances.tetrisMenu.Close();
         }
         public void SetLevel(int level)
         {

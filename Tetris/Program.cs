@@ -20,7 +20,8 @@ namespace Tetris
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(FormInstances.tetrisForm);
+            FormInstances.tetrisMenu = new TetrisMenu();
+            Application.Run(FormInstances.tetrisMenu);
         }
     }
 }

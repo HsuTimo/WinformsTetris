@@ -25,6 +25,11 @@ namespace Tetris
 
         private void BtnPlayPressed(object sender, EventArgs e)
         {
+            if (FormInstances.tetrisForm!=null)
+            {
+                FormInstances.tetrisForm.Dispose();
+            }
+            FormInstances.tetrisForm = new TetrisForm();
             FormInstances.tetrisForm.Show();
             FormInstances.tetrisMenu.Hide();
             FormInstances.tetrisForm.SetLevel(_selectedLevel);
@@ -33,14 +38,20 @@ namespace Tetris
 
         private void TetrisMenuShown(object sender, EventArgs e)
         {
-            FormInstances.tetrisForm.Hide();
+            if (FormInstances.tetrisForm != null)
+            {
+                if (FormInstances.tetrisForm.Visible == true)
+                {
+                    FormInstances.tetrisForm.Hide();
+                }
+            }
         }
 
         private void TetrisMenuClosed(object sender, FormClosedEventArgs e)
         {
-            if (FormInstances.tetrisForm.Visible == false)
+            if (FormInstances.tetrisForm != null)
             {
-                FormInstances.tetrisForm.Close();
+                FormInstances.tetrisForm.Dispose();
             }
         }
 

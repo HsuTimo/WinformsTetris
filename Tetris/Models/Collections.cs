@@ -73,14 +73,16 @@ namespace Tetris.Models
             string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/My Games/Winforms Tetris Tim Hsu/";
             string fileName = "scores.txt";
             string filePath = saveDir + fileName;
-            if (!Directory.Exists(saveDir))
-            {
-                Directory.CreateDirectory(saveDir);
-            }
-            FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
+            FileStream fs = null;
+            StreamReader sr = null;
             try
             {
+                if (!Directory.Exists(saveDir))
+                {
+                    Directory.CreateDirectory(saveDir);
+                }
+                fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read);
+                sr = new StreamReader(fs);
                 string content;
                 while (!sr.EndOfStream)
                 {
@@ -92,14 +94,20 @@ namespace Tetris.Models
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message);
+                throw;
             }
             finally
             {
-                sr.Close();
-                fs.Close();
+                if (sr != null)
+                {
+                    sr.Close();
+                }
+                if (fs != null)
+                {
+                    fs.Close();
+                }
             }
         }
         public static void SaveScoresToFile()
@@ -107,18 +115,36 @@ namespace Tetris.Models
             string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/My Games/Winforms Tetris Tim Hsu/";
             string fileName = "scores.txt";
             string filePath = saveDir + fileName;
-            if (!Directory.Exists(saveDir))
+            FileStream fs = null;
+            StreamWriter sr = null;
+            try
             {
-                Directory.CreateDirectory(saveDir);
+                if (!Directory.Exists(saveDir))
+                {
+                    Directory.CreateDirectory(saveDir);
+                }
+                fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
+                sr = new StreamWriter(fs);
+                foreach (var item in Playerscores)
+                {
+                    sr.WriteLine($"{item.StartLevel},{item.Score},{item.Name}");
+                }
             }
-            FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter sr = new StreamWriter(fs);
-            foreach (var item in Playerscores)
+            catch (Exception)
             {
-                sr.WriteLine($"{item.StartLevel},{item.Score},{item.Name}");
+                throw;
             }
-            sr.Close();
-            fs.Close();
+            finally
+            {
+                if (sr != null)
+                {
+                    sr.Close();
+                }
+                if (fs != null)
+                {
+                    fs.Close();
+                }
+            }
         }
     }
 }
