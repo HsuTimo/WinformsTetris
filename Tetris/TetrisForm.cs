@@ -609,6 +609,7 @@ namespace Tetris
         private void BtnExitClicked(object sender, EventArgs e)
         {
             FormInstances.tetrisMenu.Show();
+            FormInstances.tetrisMenu.UpdateHighscoreList();
             FormInstances.tetrisForm.Hide();
         }
         private void TetrisFormClosed(object sender, FormClosedEventArgs e)

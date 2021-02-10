@@ -60,7 +60,7 @@ namespace Tetris
             _selectedLevel = Int32.Parse(menuLevel.Text[menuLevel.Text.Length - 1].ToString());
             UpdateHighscoreList();
         }
-        private void UpdateHighscoreList()
+        public void UpdateHighscoreList()
         {
             lstHighScores.Items.Clear();
             int counter = 1;
