@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Tetris.Interfaces;
 
@@ -71,79 +72,26 @@ namespace Tetris.Models
         {
             Playerscores.Clear();
             string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/My Games/Winforms Tetris Tim Hsu/";
-            string fileName = "scores.txt";
+            string fileName = "scores.bin";
             string filePath = saveDir + fileName;
-            FileStream fs = null;
-            StreamReader sr = null;
-            try
+            using (Stream stream = File.Open(filePath,FileMode.OpenOrCreate))
             {
-                if (!Directory.Exists(saveDir))
+                BinaryFormatter bin = new BinaryFormatter();
+                if (stream.Length != 0)
                 {
-                    Directory.CreateDirectory(saveDir);
-                }
-                fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read);
-                sr = new StreamReader(fs);
-                string content;
-                while (!sr.EndOfStream)
-                {
-                    content = sr.ReadLine();
-                    if (!String.IsNullOrEmpty(content))
-                    {
-                        string[] entry = content.Split(',');
-                        Playerscores.Add(new Playerscore(Int32.Parse(entry[0]),Int32.Parse(entry[1]),entry[2]));
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (sr != null)
-                {
-                    sr.Close();
-                }
-                if (fs != null)
-                {
-                    fs.Close();
+                    Playerscores = (List<Playerscore>)bin.Deserialize(stream);
                 }
             }
         }
         public static void SaveScoresToFile()
         {
             string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/My Games/Winforms Tetris Tim Hsu/";
-            string fileName = "scores.txt";
+            string fileName = "scores.bin";
             string filePath = saveDir + fileName;
-            FileStream fs = null;
-            StreamWriter sr = null;
-            try
+            using (Stream stream = File.Open(filePath, FileMode.OpenOrCreate))
             {
-                if (!Directory.Exists(saveDir))
-                {
-                    Directory.CreateDirectory(saveDir);
-                }
-                fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-                sr = new StreamWriter(fs);
-                foreach (var item in Playerscores)
-                {
-                    sr.WriteLine($"{item.StartLevel},{item.Score},{item.Name}");
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (sr != null)
-                {
-                    sr.Close();
-                }
-                if (fs != null)
-                {
-                    fs.Close();
-                }
+                BinaryFormatter bin = new BinaryFormatter();
+                bin.Serialize(stream, Playerscores);
             }
         }
     }

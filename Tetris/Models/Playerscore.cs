@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Tetris.Models
 {
+    [Serializable]
     public class Playerscore:IComparable<Playerscore>
     {
         public int StartLevel { get; private set; }
