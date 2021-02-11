@@ -74,6 +74,10 @@ namespace Tetris.Models
             string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/My Games/Winforms Tetris Tim Hsu/";
             string fileName = "scores.bin";
             string filePath = saveDir + fileName;
+            if (!Directory.Exists(saveDir))
+            {
+                Directory.CreateDirectory(saveDir);
+            }
             using (Stream stream = File.Open(filePath,FileMode.OpenOrCreate))
             {
                 BinaryFormatter bin = new BinaryFormatter();
@@ -87,6 +91,10 @@ namespace Tetris.Models
         {
             string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/My Games/Winforms Tetris Tim Hsu/";
             string fileName = "scores.bin";
+            if (!Directory.Exists(saveDir))
+            {
+                Directory.CreateDirectory(saveDir);
+            }
             string filePath = saveDir + fileName;
             using (Stream stream = File.Open(filePath, FileMode.OpenOrCreate))
             {
